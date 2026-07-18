@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Management</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Table CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.22.1/bootstrap-table.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<style>
+  body { padding: 30px; background: #e9ecef; }
+  .card-wrap { max-width: 1000px; margin: 0 auto; }
+
+  .toolbar { margin-bottom: 12px; }
+  .btn-navy { background: #1b3a5c; color: #fff; }
+  .btn-navy:hover { background: #16304c; color: #fff; }
+  .btn-green { background: #4caf7d; color: #fff; border: none; }
+  .btn-green:hover { background: #3f9c6d; color: #fff; }
+  .btn-red { background: #d9635f; color: #fff; border: none; }
+  .btn-red:hover { background: #c9524e; color: #fff; }
+  .btn-green:disabled, .btn-red:disabled { opacity: 0.5; }
+
+  /* Modal styling to match navy header */
+  #userModal .modal-header {
+    background: #1b3a5c;
+    color: #fff;
+    border-bottom: none;
+  }
+  #userModal .modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+  #userModal .modal-footer { border-top: none; }
+  #userModal .form-label { font-weight: 600; color: #1b3a5c; }
+</style>
+</head>
+<body>
+
+<div class="card-wrap">
+  <div class="d-flex justify-content-between align-items-center toolbar">
+    <h4 class="mb-0">User Management</h4>
+    <div>
+      <button id="btnAdd" class="btn btn-navy me-2"><i class="bi bi-plus-lg"></i> Add New</button>
+      <button id="btnEdit" class="btn btn-green me-2" disabled><i class="bi bi-pencil"></i> Edit</button>
+      <button id="btnRemove" class="btn btn-red" disabled><i class="bi bi-x-lg"></i> Remove</button>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-3">
+    <table id="table"
+           data-toggle="table"
+           data-search="true"
+           data-pagination="true"
+           data-page-size="5"
+           data-click-to-select="true">
+      <thead>
+        <tr>
+          <th data-field="state" data-checkbox="true"></th>
+          <th data-field="id" data-sortable="true">ID</th>
+          <th data-field="name" data-sortable="true">Full Name</th>
+          <th data-field="sex">Sex</th>
+          <th data-field="dob" data-sortable="true">Date of Birth</th>
+          <th data-field="email" data-sortable="true">Email</th>
+          <th data-field="phone">Phone Number</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Add New</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="userForm">
+          <input type="hidden" id="userId">
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Sex</label>
+              <select class="form-select" id="sex">
+                <option value="">N/A</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" class="form-control" id="dob">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+              <div class="invalid-feedback" id="emailError">
+                This email already exists.
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phone">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-green" id="btnSave"><i class="bi bi-check-lg"></i> Create</button>
+        <button type="button" class="btn btn-red" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.22.1/bootstrap-table.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
